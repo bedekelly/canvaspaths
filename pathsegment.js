@@ -118,7 +118,8 @@ PathSegment.prototype = {
      * @private
      */
     initMoveTo: function(args) {
-        // Todo: write initMoveTo.
+        this.endX = args.x;
+        this.endY = args.y;
     },
 
     /**
