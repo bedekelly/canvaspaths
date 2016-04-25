@@ -83,8 +83,7 @@ var update = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.stroke(path._path2d);
     follower.advance(1);
-    var info = follower.getInfo();
-    drawRect(info);
+    drawRect(follower.getInfo());
     setTimeout(
         function() {requestAnimationFrame(update)},
         1000 / FPS
