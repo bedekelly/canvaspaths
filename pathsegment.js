@@ -37,7 +37,7 @@ PathSegment.prototype = {
         this.endAngle = args.endAngle;
         this.angleDelta = this.endAngle - this.startAngle;
         this.anticlockwise = args.anticlockwise;
-        this.length = this.angleDelta * this.radius;
+        this.length = Math.abs(this.angleDelta * this.radius);
 
         var thisArc = this;
 

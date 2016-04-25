@@ -10,7 +10,7 @@ var PathFollower = function(path, reverse) {
     this._path = path;
     this._reverse = reverse;
     this._distanceTravelled = 0;
-    this._totalDistance = path.getLength();
+    this._totalDistance = path.length;
     this._done = false;
     this.updateInfo();
 };
@@ -31,8 +31,11 @@ PathFollower.prototype = {
      * @param delta The distance to move along the path.
      */
     advance: function(delta) {
-        this._distanceTravelled += delta;
-        this.updateInfo();
+        if (this._distanceTravelled+delta <= this._totalDistance) {
+            this._distanceTravelled += delta;
+            this.updateInfo();
+        }
+        else return "complete";
     },
 
     /**

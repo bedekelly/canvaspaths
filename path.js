@@ -7,6 +7,7 @@
 var Path = function() {
     this.segments = [];
     this._path2d = new Path2D();
+    this.length = 0;
 };
 
 
@@ -17,6 +18,7 @@ Path.prototype = {
             args: {x: x, y: y, radius: radius, startAngle: startAngle, endAngle: endAngle, anticlockwise: anticlockwise}
         }));
         this._path2d.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+        this.updateLength();
     },
 
     lineTo: function(x, y) {
@@ -26,6 +28,7 @@ Path.prototype = {
             args: {startX: lastSeg.endX, startY: lastSeg.endY, endX: x, endY: y}
         }));
         this._path2d.lineTo(x, y);
+        this.updateLength();
     },
 
     moveTo: function(x, y) {
@@ -34,6 +37,7 @@ Path.prototype = {
             args: {x: x, y: y}
         }));
         this._path2d.moveTo(x, y);
+        this.updateLength();
     },
 
     /**
@@ -74,10 +78,22 @@ Path.prototype = {
     /**
      * Returns this path's total length by summing its component segments.
      */
-    getLength: function() {
-        var length = 0;
+    updateLength: function() {
+        this.length = 0;
         for (var i=0; i<this.segments.length; i++) {
-            length += this.segments[i].length;
+            this.length += this.segments[i].length;
         }
+    },
+
+    /**
+     * Does the work of finding the angle etc, but just returns the point: no angle.
+     * @param length The distance along the path to travel.
+     * @param reverse Whether we're travelling along the path in reverse.
+     */
+    getPointAtLength: function(length, reverse) {
+        var info = this.getInfoAtLength(length, reverse);
+        return {x: info.x, y: info.y};
     }
+
+
 };
