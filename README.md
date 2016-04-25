@@ -1,9 +1,9 @@
 Canvas Paths
 =============
 
-**A rectangle's progression around a path.**
+**A rectangle's progression around a path:**
 
-![Progressive rectangle around a curve](progressive_rects.png))
+![Progressive rectangle around a curve](progressive_rects.png)
 
 Canvas paths -- i.e. the `Path2D` object -- don't have the flexibility of SVG paths for common animation tasks like finding the coordinates of a point at a distance along the path.
 
